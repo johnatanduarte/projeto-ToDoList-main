@@ -1,0 +1,178 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+html, body {
+    font-family: 'inter', sans-serif;
+}
+
+.container {
+    width: 100vh; /*mudei para centralizar*/
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.container .header span {
+    padding-top: 4px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.container form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container form .inputContainer {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.container form .inputContainer label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 8px;
+}
+
+.container form .inputContainer input {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px;
+
+    width: 520px;
+    height: 49px;
+
+    border: 1px solid #5768b3;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.container form a {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color: #747bdb;
+}
+
+.container form .button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    width: 520px;
+    height: 48px;
+
+    background: #6067c4;
+    border-radius: 12px;
+
+    font-size: 18px;
+    line-height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #fff;
+}
+
+.container form .button:houver{
+    cursor: pointer;
+    opacity: 0.8;
+
+}
+
+.container form .footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.container form .footer p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: black;
+}
+
+.container form .footer a {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-decoration-line: underline;
+    color: #5768b3;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../src/assets/checklist.jpg'); 
+    background-size:cover; /*amplia a foto*/
+    background-position: center;
+    background-repeat: no-repeat;
+    /*height: 100vh; /* Faz com que a imagem cubra toda a altura da tela */
+    /*overflow-x: hidden; /* Impede a barra de rolagem horizontal */
+    
+  } 
+/* configurações para a navegação da pagina*/
+  nav {
+    position: fixed; /* Fixa o navbar na posição */
+    top: 0; /* Define a posição superior como 0 */
+    left: 0; /* Define a posição esquerda como 0 */
+    width: 100%; /* Define a largura como 100% */
+    background-color: #5a77d6; /* Define uma cor de fundo */
+    z-index: 1000; /* Garante que o navbar esteja acima de outros elementos */
+    padding: 10px; /* Adiciona algum espaçamento interno */
+    box-shadow: 0 10px 20px 3px #628ae0;  /* Adiciona uma sombra suave */
+  }
+  
+  nav a {
+    margin-right: 10px; /* Adiciona algum espaçamento entre os links */
+    color: #333; /* Define a cor do texto */
+    text-decoration: none; /* Remove o sublinhado dos links */
+  }
+  
+  footer {
+    position: fixed; /* Fixa o rodapé na parte inferior */
+    bottom: 0; /* Define a posição inferior como 0 */
+    left: 0; /* Define a posição esquerda como 0 */
+    width: 100%; /* Define a largura como 100% */
+    background-color: #628ae0; /* Define uma cor de fundo */
+    z-index: 1000; /* Garante que o rodapé esteja acima de outros elementos */
+    padding: 20px; /* Adiciona algum espaçamento interno */
+    box-shadow: 0 -1px 8px 3px #628ae0; /* Adiciona uma sombra suave na parte superior */
+  }
+  
+  footer div {
+    max-width: 960px; /* Define a largura máxima do conteúdo do rodapé */
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+  }
+  
+  footer p {
+    margin-bottom: 10px; /* Adiciona algum espaçamento entre os parágrafos */
+    font-size: 14px; /* Define o tamanho da fonte */
+    color: #333; /* Define a cor do texto */
+  }
+  
