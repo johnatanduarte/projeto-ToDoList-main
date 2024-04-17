@@ -1,0 +1,23 @@
+footer {
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #628ae0;
+    z-index: 1000;
+    padding: 4px 20px; /* Reduzindo um pouco o padding */
+    box-shadow: 0 -1px 8px 3px #628ae0;
+    text-align: center; /* Centralizando o texto */
+  }
+  
+  footer div {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  footer p {
+    margin-bottom: 5px; /* Reduzindo um pouco o espaçamento entre os parágrafos */
+    font-size: 14px;
+    color: #333;
+  }
+  

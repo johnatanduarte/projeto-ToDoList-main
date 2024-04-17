@@ -14,7 +14,7 @@ import CarDetails from './components/CarDetails'
 import './global.css';
 import { Outlet } from 'react-router-dom' //Reaproveitamento de estrutura
 import Navbar from './components/Navbar' //Navegar entre lnks
-import Footer from './components/Footer'
+import Footer from './components/footer/Footer'
 
 
 function App() {

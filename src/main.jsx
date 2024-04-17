@@ -6,7 +6,7 @@ import './index.css'
 // configurando router -> navegação de paginas 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Login from './components/Login.jsx';
+import Login from './components/login/Login.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 import FirstComponent from './components/FirstComponent.jsx';
 

@@ -124,34 +124,3 @@ html, body {
     text-decoration-line: underline;
     color: #5768b3;
 }
-
-body {
-    margin: 0;
-    padding: 0;
-    background-image: url('../src/assets/checklist.jpg'); 
-    background-size:cover; /*amplia a foto*/
-    background-position: center;
-    background-repeat: no-repeat;
-    /*height: 100vh; /* Faz com que a imagem cubra toda a altura da tela */
-    /*overflow-x: hidden; /* Impede a barra de rolagem horizontal */
-    
-  } 
-/* configurações para a navegação da pagina*/
-  nav {
-    position: fixed; /* Fixa o navbar na posição */
-    top: 0; /* Define a posição superior como 0 */
-    left: 0; /* Define a posição esquerda como 0 */
-    width: 100%; /* Define a largura como 100% */
-    background-color: #5a77d6; /* Define uma cor de fundo */
-    z-index: 1000; /* Garante que o navbar esteja acima de outros elementos */
-    padding: 10px; /* Adiciona algum espaçamento interno */
-    box-shadow: 0 10px 20px 3px #628ae0;  /* Adiciona uma sombra suave */
-  }
-  
-  nav a {
-    margin-right: 10px; /* Adiciona algum espaçamento entre os links */
-    color: #333; /* Define a cor do texto */
-    text-decoration: none; /* Remove o sublinhado dos links */
-  }
-  
-  
