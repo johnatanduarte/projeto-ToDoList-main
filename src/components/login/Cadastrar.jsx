@@ -4,16 +4,18 @@ import logo from "../../assets/Todo List.svg";
 import feito from "../../assets/feito.png"; 
 import "./login.css";
 
-const Login = () => {
+const Cadastrar = () => {
     // State para armazenar os valores dos campos de entrada
+    const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
+    const [confirmarEmail, setConfirmarEmail] = useState(''); // Novo estado para o e-mail de confirmação
     const [password, setPassword] = useState('');
 
     // Função para lidar com o envio do formulário
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        console.log('E-mail:', email, 'Senha:', password);
+        console.log('Nome:', nome, 'E-mail:', email, 'Confirmação de E-mail:', confirmarEmail, 'Senha:', password);
         
     };
 
@@ -21,10 +23,21 @@ const Login = () => {
         <div className="container">
             <header className="header">
                 <img src={logo} alt="ToDoList" /> 
-                <span>To Do List</span>
+                <span>Cadastrar</span>
             </header>
 
-            <form>
+            <form onSubmit={handleSubmit}>
+                <div className="inputContainer">
+                    <label htmlFor="nome">Nome:</label>
+                    <input
+                        type="text"
+                        name="nome"
+                        id="nome"
+                        placeholder="Seu nome"
+                        value={nome}
+                        onChange={(e) => setNome(e.target.value)}
+                    />
+                </div>
                 <div className="inputContainer">
                     <label htmlFor="email">E-mail:</label>
                     <input
@@ -34,6 +47,17 @@ const Login = () => {
                         placeholder="example@gmail.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div className="inputContainer">
+                    <label htmlFor="confirmarEmail">Confirmar E-mail:</label> {/* Campo de confirmação de e-mail */}
+                    <input
+                        type="text"
+                        name="confirmarEmail"
+                        id="confirmarEmail"
+                        placeholder="Confirme seu e-mail"
+                        value={confirmarEmail}
+                        onChange={(e) => setConfirmarEmail(e.target.value)}
                     />
                 </div>
                 <div className="inputContainer">
@@ -48,17 +72,15 @@ const Login = () => {
                     />
                 </div>
 
-                <a href="">Esqueci minha senha</a>
-
-                <button className="button">Entrar <img src={feito} /> </button>
+                <button className="button">Cadastrar <img src={feito} alt="feito" /></button>
 
                 <div className="footer">
-                    <p>Não possui uma conta? </p>
-                    <Link to="/cadastrar">Criar uma conta!</Link> {/* Usando Link para navegar para a página de cadastro */}
+                    <p>Já possui uma conta? </p>
+                    <Link to="/Login">Login!</Link>
                 </div>
             </form>
         </div>
      );
 };
  
-export default Login;
+export default Cadastrar;

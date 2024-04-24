@@ -7,8 +7,9 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Login from './components/login/Login.jsx';
+import Cadastrar from './components/login/Cadastrar.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
-import FirstComponent from './components/FirstComponent.jsx';
+import FirstComponent from './components/Home/FirstComponent.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "Cadastrar",
+        element: <Cadastrar />,
       },
       {
         path: "FirstComponent",

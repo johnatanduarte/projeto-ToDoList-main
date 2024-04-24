@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinha os elementos à direita */
+  }
+  
+  .links-container {
+    margin-top: 20px; /* Espaçamento superior */
+  }
+  
+  .link {
+    margin-left: 10px; /* Espaçamento entre os links */
+    text-decoration: none;
+    color: #333; /* Cor do texto */
+  }
+  
+  .link:hover {
+    color: #007bff; /* Cor do texto ao passar o mouse */
+  }
+  

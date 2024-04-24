@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import FirstComponent from './components/FirstComponent'
+import FirstComponent from './components/Home/FirstComponent'
 import TemplateExpressions from './components/TemplateExpressions'
 import MyComponent from './components/MyComponent'
 import Events from './components/Events'
@@ -32,6 +32,7 @@ function App() {
 
   return (
     <>
+    
     {/* <div>
         <img src={cr7Image} alt="Cristiano Ronaldo" title='CR7' /> 
       </div>
