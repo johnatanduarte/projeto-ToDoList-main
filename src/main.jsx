@@ -10,6 +10,7 @@ import Login from './components/login/Login.jsx';
 import Cadastrar from './components/login/Cadastrar.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 import FirstComponent from './components/Home/FirstComponent.jsx';
+import ToDoList from './components/todolist/ToDoList.jsx';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path: "FirstComponent",
         element: <FirstComponent />,
       }, 
+      {
+        path: "todolist",
+        element: <ToDoList />,
+      },
     ],
   },
 ]);//array com as rotas de navegação 

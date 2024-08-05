@@ -128,7 +128,7 @@ html, body {
 body {
     margin: 0;
     padding: 0;
-    background-image: url('../src/assets/checklist.jpg'); 
+    background-image: url('../src/assets/checklist2.jpg'); 
     background-size:cover; /*amplia a foto*/
     background-position: center;
     background-repeat: no-repeat;
@@ -154,4 +154,14 @@ body {
     text-decoration: none; /* Remove o sublinhado dos links */
   }
   
-  
+  .container {
+    width: 420px; /* Ajuste conforme necessário */
+    height: 500px; /* Defina uma altura fixa */
+    margin: 100px auto;
+    padding: 80px;
+    border: 1px solid #8da9dd;
+    border-radius: 10px;
+    background-color: #89b6eb23;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /*overflow: auto; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
+  }

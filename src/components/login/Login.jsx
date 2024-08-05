@@ -1,20 +1,31 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
 import logo from "../../assets/Todo List.svg"; 
 import feito from "../../assets/feito.png"; 
 import "./login.css";
 
 const Login = () => {
-    // State para armazenar os valores dos campos de entrada
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Instanciar o useNavigate
 
-    // Função para lidar com o envio do formulário
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         
-        console.log('E-mail:', email, 'Senha:', password);
-        
+        try {
+            const response = await fetch('http://localhost:3000/users');
+            const users = await response.json();
+            
+            const user = users.find(user => user.email === email && user.password === password);
+            if (user) {
+                // Redirecionar para a lista de tarefas se o login for bem-sucedido
+                navigate('/todolist');
+            } else {
+                alert('Credenciais inválidas. Tente novamente.');
+            }
+        } catch (error) {
+            console.error('Erro ao verificar usuário:', error);
+        }
     };
 
     return ( 
@@ -24,7 +35,7 @@ const Login = () => {
                 <span>To Do List</span>
             </header>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="inputContainer">
                     <label htmlFor="email">E-mail:</label>
                     <input
@@ -50,11 +61,11 @@ const Login = () => {
 
                 <a href="">Esqueci minha senha</a>
 
-                <button className="button">Entrar <img src={feito} /> </button>
+                <button className="button" type="submit">Entrar <img src={feito} /> </button>
 
                 <div className="footer">
                     <p>Não possui uma conta? </p>
-                    <Link to="/cadastrar">Criar uma conta!</Link> {/* Usando Link para navegar para a página de cadastro */}
+                    <Link to="/cadastrar">Criar uma conta!</Link>
                 </div>
             </form>
         </div>

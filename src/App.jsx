@@ -43,12 +43,6 @@ function App() {
       <Navbar />
       <Outlet />
       {/*
-      <FirstComponent />
-      <TemplateExpressions />
-      <MyComponent />
-      <Events />
-      <ListRender />
-      <CondicionalRender />
       <ShowUserName name="Johnatan" />
       <CarDetails brand="VW" km={100000} color="Azul" />
       {cars.map((car) => (

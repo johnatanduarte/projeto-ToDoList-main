@@ -1,15 +1,92 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "email": "example@gmail.com",
-        "password": "senha123"
-      },
-      {
-        "id": 2,
-        "email": "teste@teste.com",
-        "password": "outrasenha"
-      }
-    ]
-  }
-  
+  "users": [
+    {
+      "id": "1",
+      "email": "example@gmail.com",
+      "password": "senha123"
+    },
+    {
+      "id": "2",
+      "email": "teste@teste.com",
+      "password": "outrasenha"
+    },
+    {
+      "id": "2",
+      "email": "johnatanduartefranco95@gmail.com",
+      "password": "senha123"
+    }
+  ],
+  "todos": [
+    {
+      "id": "562a",
+      "text": "fazer comida",
+      "completed": false
+    },
+    {
+      "id": "4a82",
+      "text": "cscs",
+      "date": "2024-07-13T18:19:30.172Z",
+      "completed": false
+    },
+    {
+      "id": "f477",
+      "text": "dawd",
+      "date": "2024-07-30T18:29:57.000Z",
+      "completed": false
+    },
+    {
+      "id": "f425",
+      "text": "daw",
+      "date": "2024-07-13T18:30:12.593Z",
+      "completed": false
+    },
+    {
+      "id": "df8f",
+      "text": "po",
+      "date": "2024-07-31T18:30:55.000Z",
+      "completed": false
+    },
+    {
+      "id": "bd76",
+      "text": "oi",
+      "date": "2024-07-13T18:38:26.510Z",
+      "completed": false
+    },
+    {
+      "id": "3d63",
+      "text": "dawdawd",
+      "date": "2024-07-13T18:40:54.154Z",
+      "completed": false
+    },
+    {
+      "id": "1cf1",
+      "text": "fwef",
+      "date": "2024-07-13T18:54:34.642Z",
+      "completed": false
+    },
+    {
+      "id": "7d00",
+      "text": "rrgerg",
+      "date": "2024-07-13T18:54:42.535Z",
+      "completed": false
+    },
+    {
+      "id": "d392",
+      "text": "5116",
+      "date": "2024-07-13T19:10:11.219Z",
+      "completed": false
+    },
+    {
+      "id": "8da9",
+      "text": "thrthr",
+      "date": "2024-07-13T20:28:08.402Z",
+      "completed": false
+    },
+    {
+      "id": "ea43",
+      "text": "rgerg",
+      "date": "2024-07-13T20:35:08.233Z",
+      "completed": false
+    }
+  ]
+}
