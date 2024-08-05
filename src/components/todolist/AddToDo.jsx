@@ -39,7 +39,11 @@ const AddToDo = ({ addTodo }) => {
                 selected={date} 
                 onChange={(date) => setDate(date)} 
                 className="add-todo-datepicker"
-                dateFormat="dd/MM/yyyy"
+                showTimeSelect
+                dateFormat="dd/MM/yyyy HH:mm"
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                placeholderText="Selecione a data e hora"
             />
             <button className="add-todo-button" type="submit">Adicionar</button>
             {error && <p className="error-message">{error}</p>} {/* Exibir mensagem de erro se houver */}

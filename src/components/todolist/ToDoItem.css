@@ -17,6 +17,11 @@
     background-color: #689fdf;
 }
 
+.todo-item-today {
+    background-color: #fff3cd; /* Destaca a tarefa de hoje com uma cor de fundo diferente */
+    border-left: 5px solid #ffc107; /* Adiciona uma borda lateral para mais destaque */
+}
+
 .todo-item span {
     flex-grow: 1;
     margin-right: 10px;
