@@ -17,8 +17,9 @@ const AddToDo = ({ addTodo }) => {
         }
 
         addTodo({
-            text,
-            date: date.toISOString(), // Armazenar a data como ISO string
+            userId: 1, // Valor fictício para o exemplo
+            title: text,
+            date: date.toISOString(),
             completed: false
         });
         setText('');

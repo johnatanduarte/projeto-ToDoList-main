@@ -12,14 +12,38 @@ const Cadastrar = () => {
     const [password, setPassword] = useState('');
 
     // Função para lidar com o envio do formulário
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        
-        console.log('Nome:', nome, 'E-mail:', email, 'Confirmação de E-mail:', confirmarEmail, 'Senha:', password);
-        
+
+        if (email !== confirmarEmail) {
+            alert('Os e-mails não coincidem.');
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:3000/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: nome,
+                    email: email,
+                    password: password
+                })
+            });
+
+            if (response.ok) {
+                alert('Cadastro realizado com sucesso!');
+                // Redirecionar para o login após o cadastro
+                window.location.href = '/login';
+            } else {
+                alert('Erro ao cadastrar. Tente novamente.');
+            }
+        } catch (error) {
+            console.error('Erro ao cadastrar usuário:', error);
+        }
     };
 
-    return ( 
+    return (
         <div className="container">
             <header className="header">
                 <img src={logo} alt="ToDoList" /> 
@@ -76,11 +100,11 @@ const Cadastrar = () => {
 
                 <div className="footer">
                     <p>Já possui uma conta? </p>
-                    <Link to="/Login">Login!</Link>
+                    <Link to="/login">Login!</Link>
                 </div>
             </form>
         </div>
-     );
+    );
 };
  
 export default Cadastrar;

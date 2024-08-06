@@ -4,7 +4,7 @@ import { format, parseISO, isToday } from 'date-fns';
 
 const ToDoItem = ({ todo, updateTodo, deleteTodo }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [newText, setNewText] = useState(todo.text);
+    const [newText, setNewText] = useState(todo.title);
 
     const handleUpdate = () => {
         if (newText.trim() === '') {
@@ -12,12 +12,12 @@ const ToDoItem = ({ todo, updateTodo, deleteTodo }) => {
         }
         updateTodo({
             ...todo,
-            text: newText
+            title: newText
         });
         setIsEditing(false);
     };
 
-    const isDueToday = isToday(parseISO(todo.date)); // Verifica se a data é hoje
+    const isDueToday = todo.date ? isToday(parseISO(todo.date)) : false; // Verifica se a data é hoje
 
     return (
         <li className={`todo-item ${todo.completed ? 'todo-item-completed' : ''} ${isDueToday ? 'todo-item-today' : ''}`}>
@@ -32,8 +32,12 @@ const ToDoItem = ({ todo, updateTodo, deleteTodo }) => {
                 </>
             ) : (
                 <>
-                    <span>{todo.text}</span>
-                    <span className="todo-item-date">{format(parseISO(todo.date), 'dd/MM/yyyy HH:mm')}</span> {/* Formato atualizado */}
+                    <span>{todo.title}</span>
+                    {todo.date && (
+                        <span className="todo-item-date">
+                            {format(parseISO(todo.date), 'dd/MM/yyyy HH:mm')}
+                        </span>
+                    )}
                 </>
             )}
             <div className="todo-item-actions">

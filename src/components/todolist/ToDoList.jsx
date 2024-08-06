@@ -9,9 +9,9 @@ const ToDoList = () => {
     useEffect(() => {
         const fetchTodos = async () => {
             try {
-                const response = await fetch('http://localhost:3000/todos');
+                const response = await fetch('https://jsonplaceholder.typicode.com/todos');
                 const todos = await response.json();
-                setTodos(ttodos);
+                setTodos(todos);
             } catch (err) {
                 console.error('Erro ao buscar tarefas:', err);
             }
@@ -22,14 +22,14 @@ const ToDoList = () => {
 
     const addTodo = async (todo) => {
         try {
-            const response = await fetch('http://localhost:3000/todos', {
+            const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(todo)
             });
 
             const newTodo = await response.json();
-            setTodos([...todos, newTodo]);
+            setTodos([newTodo, ...todos]);
         } catch (err) {
             console.error('Erro ao adicionar tarefa:', err);
         }
@@ -37,7 +37,7 @@ const ToDoList = () => {
 
     const updateTodo = async (updatedTodo) => {
         try {
-            await fetch(`http://localhost:3000/todos/${updatedTodo.id}`, {
+            await fetch(`https://jsonplaceholder.typicode.com/todos/${updatedTodo.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedTodo)
@@ -51,7 +51,7 @@ const ToDoList = () => {
 
     const deleteTodo = async (id) => {
         try {
-            await fetch(`http://localhost:3000/todos/${id}`, {
+            await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
                 method: 'DELETE'
             });
 

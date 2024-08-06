@@ -1,46 +1,63 @@
-/* ToDoItem.css */
+/* Estilos para um item de tarefa */
 .todo-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Espaço entre conteúdo e ações */
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid #0c6da5; /*linha q separa os itens*/
-    transition: background-color 0.3s;
+    border-bottom: 1px solid #0c6da5; /* Linha que separa os itens */
+    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+    word-break: break-word; /* Quebra de palavras longas */
 }
 
+/* Estilos para tarefas concluídas */
 .todo-item-completed {
-    text-decoration: line-through;
-    color: #888888;
+    text-decoration: line-through; /* Texto riscado */
+    color: #888888; /* Cor do texto riscado */
 }
 
+/* Estilos para hover em um item de tarefa */
 .todo-item:hover {
-    background-color: #689fdf;
+    background-color: #689fdf; /* Cor de fundo ao passar o mouse */
 }
 
+/* Estilos para destacar tarefas de hoje */
 .todo-item-today {
-    background-color: #fff3cd; /* Destaca a tarefa de hoje com uma cor de fundo diferente */
-    border-left: 5px solid #ffc107; /* Adiciona uma borda lateral para mais destaque */
+    background-color: #fff3cd; /* Cor de fundo diferente */
+    border-left: 5px solid #ffc107; /* Borda lateral para mais destaque */
 }
 
+/* Estilos para o texto da tarefa */
 .todo-item span {
-    flex-grow: 1;
-    margin-right: 10px;
+    flex-grow: 1; /* Ocupar o espaço disponível */
+    margin-right: 10px; /* Espaço à direita */
 }
 
+/* Estilos para a data da tarefa */
 .todo-item-date {
-    margin-right: 10px;
-    font-size: 14px;
-    color: #555;
+    margin-right: 10px; /* Espaço à direita */
+    font-size: 14px; /* Tamanho da fonte */
+    color: #555; /* Cor do texto */
 }
 
+/* Contêiner para os botões de ação */
+.todo-item-actions {
+    display: flex; /* Alinhar os botões em linha */
+    gap: 5px; /* Espaço entre os botões */
+}
+
+/* Estilos base para os botões de ação */
 .todo-item-actions button {
-    margin-left: 5px;
-    padding: 5px 10px;
+    padding: 5px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100px; /* Largura fixa para os botões */
+    height: 40px; /* Altura fixa para os botões */
+    text-align: center; /* Centralizar texto nos botões */
+    white-space: nowrap; /* Impede a quebra de linha dentro dos botões */
 }
 
+/* Estilos para o botão de deletar */
 .todo-item-actions .delete {
     background-color: #f44336;
     color: white;
@@ -50,6 +67,7 @@
     background-color: #aa1717;
 }
 
+/* Estilos para hover nos botões de ação */
 .todo-item-actions button:hover {
     background-color: #c5c4c4;
 }
