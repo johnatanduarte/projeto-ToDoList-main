@@ -9,13 +9,13 @@ html, body {
 }
 
 .container {
-    width: 100vh; /*mudei para centralizar*/
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
+    width: 420px; /* Ajuste conforme necessário */
+    height: 500px; /* Defina uma altura fixa */
+    margin: 100px auto;
+    padding: 80px;
+    border-radius: 10px;
+    /*overflow: auto; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
+  }
 
 .container .header {
     display: flex;
@@ -143,24 +143,19 @@ body {
     left: 0; /* Define a posição esquerda como 0 */
     width: 100%; /* Define a largura como 100% */
     background-color: #262b31; /* Define uma cor de fundo */
+    font-size: 18px;
     z-index: 1000; /* Garante que o navbar esteja acima de outros elementos */
     padding: 10px; /* Adiciona algum espaçamento interno */
   }
   
   nav a {
-    margin-right: 10px; /* Adiciona algum espaçamento entre os links */
+    margin-right: 20px; /* Adiciona algum espaçamento entre os links */
     color: #fff; /* Define a cor do texto */
+    font-weight: bold;
     text-decoration: none; /* Remove o sublinhado dos links */
   }
-  
-  .container {
-    width: 420px; /* Ajuste conforme necessário */
-    height: 500px; /* Defina uma altura fixa */
-    margin: 100px auto;
-    padding: 80px;
-    border: 1px solid #8da9dd;
-    border-radius: 10px;
-    background-color: #89b6eb23;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /*overflow: auto; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
+
+  nav a:hover {
+    color: #45BAFF;
   }
+  

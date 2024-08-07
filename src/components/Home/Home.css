@@ -3,10 +3,7 @@
   height: 500px; /* Defina uma altura fixa */
   margin: 100px auto;
   padding: 80px;
-  border: 1px solid #8da9dd;
   border-radius: 10px;
-  background-color: #89b6eb23;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   /*overflow: auto; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
 }
 
@@ -42,3 +39,38 @@
 .link:hover {
   color: #007bff; /* Cor do texto ao passar o mouse */
 }
+
+.button {
+  margin: 5px 0;
+  border: none;
+
+  width: 520px;
+  height: 48px;
+
+  background: #8FA7DB;
+
+  font-size: 18px;
+  line-height: 22px;
+  
+  align-items: center;
+  justify-content: center;
+  color: #FCFCFC;
+  text-decoration:none;
+}
+
+.button:hover{
+  cursor: pointer;
+  opacity: 0.8;
+  color: #262b31;
+  background: #56BFA1;
+
+}
+
+.buttons-position {
+  margin: 50px auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

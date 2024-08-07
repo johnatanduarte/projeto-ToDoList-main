@@ -9,8 +9,8 @@ html, body {
 }
 
 .container {
-    width: 100vh; /*mudei para centralizar*/
-    height: 100vh;
+    width: 420px; /*mudei para centralizar*/
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +21,8 @@ html, body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-top: 70px;
+    margin-bottom: 30px;
 }
 
 .container .header span {
@@ -97,10 +98,11 @@ html, body {
     color: #fff;
 }
 
-.container form .button:houver{
+.container form .button:hover{
     cursor: pointer;
     opacity: 0.8;
-
+    color: #262b31;
+    background: #56BFA1;
 }
 
 .container form .footer{
