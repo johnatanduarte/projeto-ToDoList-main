@@ -1,0 +1,43 @@
+/* Estilos para o formulário de adicionar tarefa */
+.add-todo-form {
+    display: flex;
+    flex-direction: column; /* Alinhar itens em coluna */
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 10px; /* Espaço entre itens do formulário */
+    border: 1px solid #cccccc15; /* Borda sutil */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #89b7eb46; /* Fundo levemente colorido */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+}
+
+/* Estilos para os inputs e botões do formulário */
+.add-todo-input,
+.add-todo-datepicker,
+.add-todo-button {
+    width: 100%; /* Largura total */
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #1a4f9467; /* Borda dos inputs */
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Estilos para o botão de adicionar */
+.add-todo-button {
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+}
+
+.add-todo-button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para a mensagem de erro */
+.error-message {
+    color: red;
+    font-size: 14px;
+}
