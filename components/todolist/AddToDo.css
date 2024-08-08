@@ -1,12 +1,14 @@
 /* Estilos para o formulário de adicionar tarefa */
+
+
 .add-todo-form {
     display: flex;
     flex-direction: column; /* Alinhar itens em coluna */
     align-items: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     gap: 10px; /* Espaço entre itens do formulário */
     border: 1px solid #cccccc15; /* Borda sutil */
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     background-color: #89b7eb46; /* Fundo levemente colorido */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
@@ -27,13 +29,13 @@
 
 /* Estilos para o botão de adicionar */
 .add-todo-button {
-    background-color: #4caf50;
+    background-color: #6067c4;
     color: white;
     cursor: pointer;
 }
 
 .add-todo-button:hover {
-    background-color: #45a049;
+    background-color: #767de2;
 }
 
 /* Estilos para a mensagem de erro */

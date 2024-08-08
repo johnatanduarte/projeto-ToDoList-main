@@ -131,6 +131,7 @@ body {
     background-image: url('../src/assets/background.jpg'); 
     background-size: cover; /*amplia a foto*/
     background-position: center;
+    background-attachment: fixed;
     background-repeat: no-repeat;
     /*height: 100vh; /* Faz com que a imagem cubra toda a altura da tela */
     /*overflow-x: hidden; /* Impede a barra de rolagem horizontal */

@@ -62,19 +62,25 @@ const ToDoList = () => {
     };
 
     return (
-        <div className="todo-list">
-            <h1>Lista de Tarefas</h1>
-            <AddToDo addTodo={addTodo} />
-            <ul>
-                {todos.map(todo => (
-                    <ToDoItem 
-                        key={todo.id} 
-                        todo={todo} 
-                        updateTodo={updateTodo} 
-                        deleteTodo={deleteTodo} 
-                    />
-                ))}
-            </ul>
+        <div className="container-principal">
+            <div className="container-tarefas">
+                <h1>Lista de Tarefas</h1>
+                <AddToDo addTodo={addTodo} />
+            </div>
+            <div className="container-list">
+                <div className="todo-list">
+                    <ul>
+                        {todos.map(todo => (
+                            <ToDoItem 
+                                key={todo.id} 
+                                todo={todo} 
+                                updateTodo={updateTodo} 
+                                deleteTodo={deleteTodo} 
+                            />
+                        ))}
+                    </ul>
+                </div>
+            </div>
         </div>
     );
 };
