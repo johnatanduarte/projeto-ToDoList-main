@@ -1,0 +1,50 @@
+/* Estilos para a lista de tarefas */
+
+.todo-list {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #cccccc15; /* Borda sutil */
+    border-radius: 8px;
+    background-color: #89b7eb1e; /* Fundo levemente colorido */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+}
+
+/* Estilos para o título da lista de tarefas */
+.todo-list h1 {
+    text-align: center;
+    color: #333; /* Cor do texto */
+    margin-bottom: 20px; /* Espaço abaixo do título */
+}
+
+/* Remove estilos padrão da lista não ordenada */
+.todo-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container-list {
+    position: relative;
+    width: 100%; /* Ajuste conforme necessário */
+    height: 300px; /* Defina uma altura fixa */
+    margin: auto;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 10px;
+    overflow: auto; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
+  }
+
+  .container-tarefas {
+    position: sticky;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .container-principal {
+    position: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 700px;
+    margin-top:25%;
+  }
