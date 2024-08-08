@@ -1,139 +1,144 @@
+/* Reset básico para garantir que não haja margens ou espaçamentos indesejados */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
 }
+
+/* Estilização global para o HTML e corpo do documento */
 html, body {
-    font-family: 'inter', sans-serif;
+    font-family: 'inter', sans-serif; /* Define a fonte padrão para o texto */
 }
 
+/* Contêiner principal que envolve o formulário e centraliza seu conteúdo */
 .container {
-    width: 420px; /*mudei para centralizar*/
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    width: 420px; /* Define a largura fixa do contêiner */
+    height: 500px; /* Define a altura fixa do contêiner */
+    display: flex; /* Usa flexbox para facilitar o alinhamento */
+    align-items: center; /* Alinha verticalmente o conteúdo ao centro */
+    justify-content: center; /* Alinha horizontalmente o conteúdo ao centro */
+    flex-direction: column; /* Organiza os elementos em uma coluna */
 }
 
+/* Cabeçalho do contêiner */
 .container .header {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 70px;
-    margin-bottom: 30px;
+    display: flex; /* Usa flexbox para facilitar o alinhamento */
+    align-items: center; /* Alinha os itens do cabeçalho no centro */
+    flex-direction: column; /* Organiza os elementos em uma coluna */
+    margin-top: 70px; /* Espaçamento superior para posicionar o cabeçalho */
+    margin-bottom: 30px; /* Espaçamento inferior para separar do formulário */
 }
 
+/* Estilização do texto dentro do cabeçalho */
 .container .header span {
-    padding-top: 4px;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
+    padding-top: 4px; /* Adiciona espaçamento superior ao texto */
+    font-weight: 500; /* Define o peso da fonte como médio */
+    font-size: 20px; /* Define o tamanho da fonte */
+    line-height: 24px; /* Define a altura da linha do texto */
 }
 
-.container form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+/* Estilização do formulário */
+.container form {
+    display: flex; /* Usa flexbox para facilitar o alinhamento */
+    align-items: center; /* Alinha os itens do formulário no centro */
+    justify-content: center; /* Centraliza o formulário */
+    flex-direction: column; /* Organiza os elementos do formulário em uma coluna */
 }
 
+/* Contêiner para cada campo de entrada no formulário */
 .container form .inputContainer {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
+    display: flex; /* Usa flexbox para facilitar o alinhamento */
+    align-items: flex-start; /* Alinha os itens no início */
+    flex-direction: column; /* Organiza os elementos do campo em uma coluna */
 }
 
+/* Estilização do rótulo (label) dos campos de entrada */
 .container form .inputContainer label {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    margin-bottom: 8px;
+    font-weight: 400; /* Define o peso da fonte como normal */
+    font-size: 16px; /* Define o tamanho da fonte */
+    line-height: 19px; /* Define a altura da linha do texto */
+    margin-bottom: 8px; /* Adiciona espaço entre o rótulo e o campo de entrada */
 }
 
+/* Estilização dos campos de entrada de texto */
 .container form .inputContainer input {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 16px;
+    display: flex; /* Usa flexbox para facilitar o alinhamento */
+    flex-direction: row; /* Organiza o conteúdo dos inputs horizontalmente */
+    align-items: flex-start; /* Alinha os itens no início */
+    padding: 16px; /* Adiciona espaçamento interno ao campo de entrada */
 
-    width: 520px;
-    height: 49px;
+    width: 520px; /* Define a largura do campo de entrada */
+    height: 49px; /* Define a altura do campo de entrada */
 
-    border: 1px solid #5768b3;
-    border-radius: 12px;
-    margin-bottom: 12px;
+    border: 1px solid #5768b3; /* Define a cor e espessura da borda */
+    border-radius: 12px; /* Adiciona cantos arredondados */
+    margin-bottom: 12px; /* Espaçamento inferior para separar os campos de entrada */
 }
 
+/* Estilização dos links dentro do formulário */
 .container form a {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    color: #747bdb;
+    font-weight: 400; /* Define o peso da fonte como normal */
+    font-size: 16px; /* Define o tamanho da fonte */
+    line-height: 19px; /* Define a altura da linha do texto */
+    padding-top: 16px; /* Adiciona espaçamento superior ao link */
+    padding-bottom: 16px; /* Adiciona espaçamento inferior ao link */
+    color: #747bdb; /* Define a cor do texto do link */
 }
 
+/* Estilização do botão de envio do formulário */
 .container form .button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border: none;
+    display: flex; /* Usa flexbox para facilitar o alinhamento */
+    flex-direction: row; /* Organiza o conteúdo do botão horizontalmente */
+    justify-content: center; /* Centraliza o conteúdo do botão */
+    align-items: center; /* Alinha os itens no centro verticalmente */
+    border: none; /* Remove a borda padrão do botão */
 
-    width: 520px;
-    height: 48px;
+    width: 520px; /* Define a largura do botão */
+    height: 48px; /* Define a altura do botão */
 
-    background: #6067c4;
-    border-radius: 12px;
+    background: #6067c4; /* Define a cor de fundo do botão */
+    border-radius: 12px; /* Adiciona cantos arredondados */
 
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 18px; /* Define o tamanho da fonte */
+    line-height: 22px; /* Define a altura da linha do texto */
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    color: #fff;
+    display: flex; /* Usa flexbox para facilitar o alinhamento */
+    align-items: center; /* Alinha os itens no centro verticalmente */
+    justify-content: center; /* Centraliza o conteúdo do botão */
+    gap: 15px; /* Espaçamento entre os elementos internos do botão (texto e ícone) */
+    color: #fff; /* Define a cor do texto do botão como branco */
 }
 
-.container form .button:hover{
-    cursor: pointer;
-    opacity: 0.8;
-    color: #262b31;
-    background: #56BFA1;
+/* Efeito de hover (passar o mouse) no botão */
+.container form .button:hover {
+    cursor: pointer; /* Muda o cursor para indicar que o botão é clicável */
+    opacity: 0.8; /* Reduz a opacidade para criar um efeito de destaque */
+    color: #262b31; /* Altera a cor do texto no hover */
+    background: #56BFA1; /* Altera a cor de fundo no hover */
 }
 
-.container form .footer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+/* Rodapé do formulário */
+.container form .footer {
+    display: flex; /* Usa flexbox para facilitar o alinhamento */
+    align-items: center; /* Alinha os itens no centro verticalmente */
+    justify-content: center; /* Centraliza o conteúdo do rodapé */
+    gap: 10px; /* Espaçamento entre o texto e o link */
 }
 
+/* Estilização do parágrafo no rodapé */
 .container form .footer p {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: black;
+    font-weight: 400; /* Define o peso da fonte como normal */
+    font-size: 16px; /* Define o tamanho da fonte */
+    line-height: 19px; /* Define a altura da linha do texto */
+    color: black; /* Define a cor do texto */
 }
 
+/* Estilização dos links no rodapé */
 .container form .footer a {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    text-decoration-line: underline;
-    color: #5768b3;
+    font-weight: 400; /* Define o peso da fonte como normal */
+    font-size: 16px; /* Define o tamanho da fonte */
+    line-height: 19px; /* Define a altura da linha do texto */
+    text-decoration-line: underline; /* Adiciona sublinhado ao link */
+    color: #5768b3; /* Define a cor do link */
 }
-/*
-.container {
-    max-width: 555px;
-    max-height: 580px;
-    margin: 55px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-} */
