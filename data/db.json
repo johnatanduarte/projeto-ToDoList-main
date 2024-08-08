@@ -20,6 +20,12 @@
       "name": "julia",
       "email": "julia@gmail.com",
       "password": "123"
+    },
+    {
+      "id": "5012",
+      "name": "aluno",
+      "email": "aluno@gmail.com",
+      "password": "123"
     }
   ],
   "todos": [

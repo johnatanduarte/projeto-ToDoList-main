@@ -44,7 +44,7 @@ const Cadastrar = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container-login">
             <header className="header">
                 <img src={logo} alt="ToDoList" /> 
                 <span>Cadastrar</span>

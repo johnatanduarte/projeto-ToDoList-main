@@ -7,8 +7,6 @@
   /*overflow: auto; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
 }
 
-
-
 .heading-container {
   margin-bottom: 20px; /* Espaçamento inferior para separar dos links */
 }
@@ -47,7 +45,7 @@
   width: 520px;
   height: 48px;
 
-  background: #8FA7DB;
+  background: #6067c4;
 
   font-size: 18px;
   line-height: 22px;
