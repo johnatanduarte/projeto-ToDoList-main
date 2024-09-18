@@ -1,6 +1,6 @@
 .container-fundo {
   width: 420px; /* Ajuste conforme necessário */
-  height: 500px; /* Defina uma altura fixa */
+  /*height: 500px;*/ /* Defina uma altura fixa */
   margin: 100px auto;
   padding: 80px;
   border-radius: 10px;
