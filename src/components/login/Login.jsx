@@ -1,25 +1,33 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
-import logo from "../../assets/Todo List.svg"; 
-import feito from "../../assets/feito.png"; 
+import { Link, useNavigate } from "react-router-dom"; // Mantendo as importações
+import logo from "../../assets/Todo List.svg";
+import feito from "../../assets/feito.png";
 import "./login.css";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Instanciar o useNavigate
+    const navigate = useNavigate(); // useNavigate para navegação
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
         try {
-            const response = await fetch('http://localhost:3000/users');
-            const users = await response.json();
-            
-            const user = users.find(user => user.email === email && user.password === password);
-            if (user) {
-                // Redirecionar para a lista de tarefas se o login for bem-sucedido
-                navigate('/todolist');
+            // Requisição para validar o login
+            const response = await fetch('http://localhost:3001/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+                
+                // Armazenar userId no localStorage
+                localStorage.setItem('userId', user.id);
+                
+                // Redirecionar para a lista de tarefas com o userId
+                navigate('/todolist', { state: { userId: user.id } });
             } else {
                 alert('Credenciais inválidas. Tente novamente.');
             }
@@ -28,10 +36,10 @@ const Login = () => {
         }
     };
 
-    return ( 
+    return (
         <div className="container-login">
             <header className="header">
-                <img src={logo} alt="ToDoList" /> 
+                <img src={logo} alt="ToDoList" />
                 <span>To Do List</span>
             </header>
 
@@ -61,7 +69,7 @@ const Login = () => {
 
                 <a href="">Esqueci minha senha</a>
 
-                <button className="button" type="submit">Entrar <img src={feito} /> </button>
+                <button className="button" type="submit">Entrar <img src={feito} alt="ícone feito" /> </button>
 
                 <div className="footer">
                     <p>Não possui uma conta? </p>
@@ -69,7 +77,7 @@ const Login = () => {
                 </div>
             </form>
         </div>
-     );
+    );
 };
- 
+
 export default Login;

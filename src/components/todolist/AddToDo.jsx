@@ -8,6 +8,8 @@ const AddToDo = ({ addTodo }) => {
     const [date, setDate] = useState(new Date());
     const [error, setError] = useState('');
 
+    const userId = localStorage.getItem('userId'); // Obter userId do localStorage (assuma)
+
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -17,7 +19,7 @@ const AddToDo = ({ addTodo }) => {
         }
 
         addTodo({
-            userId: 1, // Valor fictício para o exemplo
+            user_id: userId, // id vinculado ao usuario em questão
             title: text,
             date: date.toISOString(),
             completed: false

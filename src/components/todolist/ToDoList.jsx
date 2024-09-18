@@ -5,24 +5,34 @@ import './ToDoList.css';
 
 const ToDoList = () => {
     const [todos, setTodos] = useState([]);
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         const fetchTodos = async () => {
+            if (!userId) {
+                return; // Prevenindo a busca se o usuário não estiver logado
+            }
+
             try {
-                const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-                const todos = await response.json();
-                setTodos(todos);
-            } catch (err) {
-                console.error('Erro ao buscar tarefas:', err);
+                const response = await fetch(`http://localhost:3001/todos/${userId}`);
+                if (!response.ok) {
+                    throw new Error('Falha ao buscar tarefas');
+                }
+                const fetchedTodos = await response.json();
+                setTodos(fetchedTodos);
+            } catch (error) {
+                console.error('Erro ao buscar tarefas:', error);
+                // Exibir uma mensagem de erro ao usuário (opcional)
             }
         };
 
         fetchTodos();
-    }, []);
+    }, [userId]);
+
 
     const addTodo = async (todo) => {
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
+            const response = await fetch('http://localhost:3001/todos', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(todo)
@@ -38,7 +48,7 @@ const ToDoList = () => {
 
     const updateTodo = async (updatedTodo) => {
         try {
-            await fetch(`https://jsonplaceholder.typicode.com/todos/${updatedTodo.id}`, {
+            await fetch(`http://localhost:3001/todos/${updatedTodo.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedTodo)
@@ -52,9 +62,13 @@ const ToDoList = () => {
 
     const deleteTodo = async (id) => {
         try {
-            await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+            const response = await fetch(`http://localhost:3001/todos/${id}`, {
                 method: 'DELETE'
             });
+
+            if (!response.ok) {
+                throw new Error('Erro ao deletar tarefa');
+              }
 
             setTodos(todos.filter(todo => todo.id !== id));
         } catch (err) {

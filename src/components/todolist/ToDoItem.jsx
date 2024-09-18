@@ -4,7 +4,7 @@ import { format, parseISO, isToday } from 'date-fns';
 
 const ToDoItem = ({ todo, updateTodo, deleteTodo }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [newText, setNewText] = useState(todo.title);
+    const [newText, setNewText] = useState(todo.text);
 
     const handleUpdate = () => {
         if (newText.trim() === '') {
@@ -12,7 +12,7 @@ const ToDoItem = ({ todo, updateTodo, deleteTodo }) => {
         }
         updateTodo({
             ...todo,
-            title: newText
+            text: newText
         });
         setIsEditing(false);
     };
@@ -32,7 +32,7 @@ const ToDoItem = ({ todo, updateTodo, deleteTodo }) => {
                 </>
             ) : (
                 <>
-                    <span>{todo.title}</span>
+                    <span>{todo.text}</span>
                     {todo.date && (
                         <span className="todo-item-date">
                             {format(parseISO(todo.date), 'dd/MM/yyyy HH:mm')}
