@@ -27,7 +27,7 @@
 .container-list {
     position: relative;
     width: 100%; /* Ajuste conforme necessário */
-    height: 300px; /* Defina uma altura fixa */
+    height: 400px; /* Defina uma altura fixa */
     margin: auto;
     justify-content: center;
     padding: 5px;
@@ -44,7 +44,7 @@
   .container-principal {
     position: flex;
     flex-direction: column;
-    width: 700px;
+    width: 1000px;
     height: 700px;
-    margin-top:25%;
+    /*margin-top:25%;*/
   }
