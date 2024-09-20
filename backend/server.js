@@ -51,13 +51,15 @@ app.get('/todos/:userId', async (req, res) => {
 
 // Rota para adicionar uma nova tarefa
 app.post('/todos', async (req, res) => {
-    const { text, date, completed, user_id } = req.body;
-    try {
+  const { text, date, completed, user_id } = req.body;
+  console.log(req.body); // Adicione esta linha para verificar o que está sendo enviado
+  try {
       const [result] = await db.query('INSERT INTO todos (text, date, completed, user_id) VALUES (?, ?, ?, ?)', [text, date, completed, user_id]);
       res.status(201).json({ id: result.insertId });
-    } catch (error) {
+  } catch (error) {
+      console.error('Erro ao adicionar tarefa:', error); // Adicione um log para erros
       res.status(500).json({ error: 'Erro ao adicionar tarefa.' });
-    }
+  }
 });
 
 // Rota para obter todas as tarefas (independente do usuário)

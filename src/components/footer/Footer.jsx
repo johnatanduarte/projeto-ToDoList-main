@@ -3,7 +3,7 @@ import "./footer.css"
 
 const Footer = () => {
   return (
-    <footer class="rodape">
+    <footer className="rodape">
       <div>
         <p>CNPJ: 123.456.789/0001-00</p>
         <p>Email: ToDoList@gmail.com</p>

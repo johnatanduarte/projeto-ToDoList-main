@@ -20,7 +20,7 @@ const AddToDo = ({ addTodo }) => {
 
         addTodo({
             user_id: userId, // id vinculado ao usuario em questão
-            title: text,
+            text: text,
             date: date.toISOString(),
             completed: false
         });

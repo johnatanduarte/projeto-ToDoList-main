@@ -30,21 +30,33 @@ const ToDoList = () => {
     }, [userId]);
 
 
-    const addTodo = async (todo) => {
-        try {
-            const response = await fetch('http://localhost:3001/todos', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(todo)
-            });
+const addTodo = async (todo) => {
+    try {
+        const formattedDate = new Date(todo.date).toISOString().slice(0, 19).replace('T', ' '); // Formato YYYY-MM-DD HH:MM:SS
 
-            const newTodo = await response.json();
-            newTodo.id = Date.now(); // Gera um id único baseado no timestamp
-            setTodos([newTodo, ...todos]);
-        } catch (err) {
-            console.error('Erro ao adicionar tarefa:', err);
+        const response = await fetch('http://localhost:3001/todos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                user_id: todo.user_id,
+                text: todo.text,
+                date: formattedDate,
+                completed: todo.completed
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao adicionar tarefa');
         }
-    };
+
+        const newTodo = await response.json();
+        setTodos([newTodo, ...todos]);
+    } catch (err) {
+        console.error('Erro ao adicionar tarefa:', err);
+    }
+};
+
+
 
     const updateTodo = async (updatedTodo) => {
         try {
@@ -84,17 +96,17 @@ const ToDoList = () => {
             </div>
             <div className="container-list">
                 <div className="todo-list">
-                    <ul>
-                        {todos.map(todo => (
-                            <ToDoItem 
-                                key={todo.id} 
-                                todo={todo} 
-                                updateTodo={updateTodo} 
-                                deleteTodo={deleteTodo} 
-                            />
-                        ))}
-                    </ul>
-                </div>
+            <ul>
+                {todos.map(todo => (
+                    <ToDoItem 
+                        key={todo.id} 
+                        todo={todo} 
+                        updateTodo={updateTodo} 
+                        deleteTodo={deleteTodo} 
+                    />
+                ))}
+            </ul>
+        </div>
             </div>
         </div>
     );
