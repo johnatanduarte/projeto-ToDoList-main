@@ -3,10 +3,68 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const db = require('./db'); // Conexão MySQL
+const nodemailer = require('nodemailer'); // Para envio de e-mails
+const cron = require('node-cron'); // Para agendamento de tarefas
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+// Configuração do transporte do Gmail
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'johnatanduartefranco95@gmail.com', // Seu email Gmail
+      pass: 'bgod shsf kzvd gyey' // Senha de aplicativo gerada no Gmail
+    },
+});
+
+// Função para enviar o e-mail
+const sendEmail = async (to, subject, text) => {
+    try {
+        await transporter.sendMail({
+            from: 'johnatanduartefranco95@gmail.com', // Remetente
+            to: to,                     // Destinatário
+            subject: subject,           // Assunto do email
+            text: text,                 // Texto do email
+        });
+        console.log('Email enviado com sucesso!');
+    } catch (error) {
+        console.error('Erro ao enviar email:', error);
+    }
+};
+
+// Função para verificar tarefas para hoje e enviar e-mails
+const checkTasksForToday = async () => {
+    try {
+        const today = new Date().toISOString().slice(0, 10); // Pega a data de hoje no formato YYYY-MM-DD
+
+        // Buscar todas as tarefas que têm a data de hoje
+        const [tasks] = await db.query('SELECT * FROM todos WHERE DATE(date) = ?', [today]);
+
+        for (const task of tasks) {
+            // Buscar o email do usuário vinculado à tarefa
+            const [user] = await db.query('SELECT email FROM users WHERE id = ?', [task.user_id]);
+
+            if (user.length > 0) {
+                const email = user[0].email;
+                const subject = `Lembrete: Tarefa "${task.text}" para hoje`;
+                const message = `Olá, você tem uma tarefa agendada para hoje: "${task.text}" em ${task.date}.`;
+
+                // Enviar email para o usuário
+                await sendEmail(email, subject, message);
+            }
+        }
+    } catch (error) {
+        console.error('Erro ao verificar tarefas de hoje:', error);
+    }
+};
+
+// Agendamento diário para verificar tarefas às 00:00
+cron.schedule('0 18 * * *', () => {
+    console.log('Verificando tarefas agendadas para hoje...');
+    checkTasksForToday(); // Verifica as tarefas e envia e-mails
+});
 
 // Rota para registrar um novo usuário
 app.post('/users', async (req, res) => {
@@ -20,7 +78,6 @@ app.post('/users', async (req, res) => {
 });
 
 // Rota para login
-
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -35,8 +92,6 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Erro ao efetuar login.' });
     }
 });
-
-
 
 // Rota para obter todas as tarefas de um usuário
 app.get('/todos/:userId', async (req, res) => {
@@ -70,7 +125,7 @@ app.get('/todos', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: 'Erro ao buscar tarefas.' });
     }
-  });
+});
 
 // Rota para obter todos os usuários
 app.get('/users', async (req, res) => {
@@ -91,7 +146,7 @@ app.delete('/todos/:id', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: 'Erro ao deletar tarefa.' });
     }
-  });
+});
 
 app.listen(3001, () => {
   console.log('Servidor rodando na porta 3001');
