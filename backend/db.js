@@ -6,7 +6,8 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'senha123',
-  database: 'todolistdb'
+  database: 'todolistdb',
+  timezone: 'America/Sao_Paulo' // Ajustar fuso horário do Brasil
 });
 
 module.exports = pool.promise();

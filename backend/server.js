@@ -61,6 +61,7 @@ const checkTasksForToday = async () => {
 };
 
 // Agendamento diário para verificar tarefas às 00:00
+//minuto hora dia-do-mês mês dia-da-semana
 cron.schedule('0 18 * * *', () => {
     console.log('Verificando tarefas agendadas para hoje...');
     checkTasksForToday(); // Verifica as tarefas e envia e-mails
