@@ -13,7 +13,7 @@ const AddToDo = ({ addTodo }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        if (text.trim() === '') {
+        if (text.trim() === '' && (!showCompleted)) {
             setError('Por favor, insira uma tarefa.');
             return;
         }
