@@ -5,6 +5,8 @@ import './ToDoList.css';
 
 const ToDoList = () => {
     const [todos, setTodos] = useState([]);
+    const [showCompleted, setShowCompleted] = useState(false);
+    const [completedTasksByMonth, setCompletedTasksByMonth] = useState([]);
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
@@ -19,7 +21,13 @@ const ToDoList = () => {
                     throw new Error('Falha ao buscar tarefas');
                 }
                 const fetchedTodos = await response.json();
+                console.log('Tarefas recebidas da API:', fetchedTodos);
+                
+                // Atualiza o estado com as tarefas do banco
                 setTodos(fetchedTodos);
+
+                // Agrupa tarefas completadas logo após carregá-las
+                groupTasksByMonth(fetchedTodos);
             } catch (error) {
                 console.error('Erro ao buscar tarefas:', error);
                 // Exibir uma mensagem de erro ao usuário (opcional)
@@ -50,13 +58,15 @@ const addTodo = async (todo) => {
         }
 
         const newTodo = await response.json();
-        setTodos([newTodo, ...todos]);
+        const updatedTodos = [newTodo, ...todos];
+
+        // Atualiza o estado e o agrupamento
+        setTodos(updatedTodos);
+        groupTasksByMonth(updatedTodos); // Atualiza a tabela ao adicionar nova tarefa
     } catch (err) {
         console.error('Erro ao adicionar tarefa:', err);
     }
 };
-
-
 
     const updateTodo = async (updatedTodo) => {
         try {
@@ -66,7 +76,13 @@ const addTodo = async (todo) => {
                 body: JSON.stringify(updatedTodo)
             });
 
-            setTodos(todos.map(todo => (todo.id === updatedTodo.id ? updatedTodo : todo)));
+            const updatedTodos = todos.map(todo =>
+                todo.id === updatedTodo.id ? updatedTodo : todo
+            );
+
+            setTodos(updatedTodos);
+            groupTasksByMonth(updatedTodos); // Atualiza a tabela ao atualizar uma tarefa
+
         } catch (err) {
             console.error('Erro ao atualizar tarefa:', err);
         }
@@ -82,10 +98,38 @@ const addTodo = async (todo) => {
                 throw new Error('Erro ao deletar tarefa');
               }
 
-            setTodos(todos.filter(todo => todo.id !== id));
+            const updatedTodos = todos.filter(todo => todo.id !== id);
+            setTodos(updatedTodos);
+            groupTasksByMonth(updatedTodos); // Atualiza a tabela ao deletar uma tarefa
         } catch (err) {
             console.error('Erro ao deletar tarefa:', err);
         }
+    };
+
+    // Função para agrupar tarefas completadas por mês
+    const groupTasksByMonth = (tasks) => {
+        if (!tasks || tasks.length === 0) {
+            console.log('Nenhuma tarefa para agrupar');
+            return;
+        }
+
+        const completedTasks = tasks.filter(todo => todo.completed === 1);
+        console.log('Tarefas completadas:', completedTasks);
+
+        const tasksByMonth = completedTasks.reduce((acc, task) => {
+            const month = task.date.slice(0,7); //Formato YYYY-MM
+            acc[month] = (acc[month] || 0) + 1; //Conta a quantidade de tarefas
+            return acc;
+        }, {});
+
+        // Convertendo o objeto em array para facilitar a renderização
+        const formattedData = Object.keys(tasksByMonth).map(month => ({
+            month,
+            count: tasksByMonth[month],
+        }));
+
+        console.log('Dados agrupados por mês:', formattedData);
+        setCompletedTasksByMonth(formattedData);
     };
 
     return (
@@ -93,21 +137,47 @@ const addTodo = async (todo) => {
             <div className="container-tarefas">
                 <h1>Lista de Tarefas</h1>
                 <AddToDo addTodo={addTodo} />
+                <button className="tarefas-button" onClick={() => setShowCompleted(!showCompleted)}>
+                    {showCompleted ? 'Todas as Tarefas' : 'Tarefas Completadas'}
+                </button>
             </div>
+            {/* Exibição condicional: Lista de tarefas ou tabela de tarefas completadas*/}
+            {!showCompleted ? (
             <div className="container-list">
                 <div className="todo-list">
-            <ul>
-                {todos.map(todo => (
-                    <ToDoItem 
-                        key={todo.id} 
-                        todo={todo} 
-                        updateTodo={updateTodo} 
-                        deleteTodo={deleteTodo} 
-                    />
-                ))}
-            </ul>
-        </div>
+                    <ul>
+                        {todos.map(todo => (
+                            <ToDoItem 
+                                key={todo.id} 
+                                todo={todo} 
+                                updateTodo={updateTodo} 
+                                deleteTodo={deleteTodo} 
+                            />
+                        ))}
+                    </ul>
+                </div>
             </div>
+            ) : (
+                <div className="container-tabela">
+                    <h3>Tarefas Completadas por Mês</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mês</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {completedTasksByMonth.map(({month, count}) => (
+                                <tr key ={month}>
+                                    <td>{month}</td>
+                                    <td>{count}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </div>
     );
 };

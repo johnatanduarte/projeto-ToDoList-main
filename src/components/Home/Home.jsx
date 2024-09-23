@@ -22,11 +22,6 @@ const Home = () => {
         </div>
 
       </div>
-      <div className="links-container">
-
-        <Link to="/Login" className="link">Login</Link>
-        <Link to="/Cadastrar" className="link">Cadastrar</Link>
-      </div>
     </div>
   );
 };

@@ -48,3 +48,40 @@
     height: 700px;
     /*margin-top:25%;*/
   }
+
+  .tarefas-button {
+    background-color: rebeccapurple;
+    color: white;
+    cursor: pointer;
+    position:absolute;
+    top: 148px;
+    right: 500px;
+
+}
+
+.tarefas-button:hover {
+    background-color: rgb(148, 110, 185);
+}
+
+.container-tabela {
+  position: relative;
+  width: 100%; /* Ajuste conforme necessário */
+  height: 400px; /* Defina uma altura fixa */
+  margin: auto;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 10px;
+  overflow: auto; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
+  background-color: #89b7eb1e;
+}
+
+table{
+  width:100%;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0,1);
+  margin:0 auto;
+}
+
+thead tr {
+  background: #6067c4;
+  color: white;
+}

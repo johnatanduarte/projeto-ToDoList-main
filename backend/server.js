@@ -70,6 +70,7 @@ cron.schedule('0 18 * * *', () => {
 // Rota para registrar um novo usuário
 app.post('/users', async (req, res) => {
     const { nome, email, password } = req.body;
+    console.log(req.body);
     try {
         const [result] = await db.query('INSERT INTO users (nome, email, password) VALUES (?, ?, ?)', [nome, email, password]);
         res.status(201).json({ id: result.insertId });
@@ -116,6 +117,29 @@ app.post('/todos', async (req, res) => {
       console.error('Erro ao adicionar tarefa:', error); // Adicione um log para erros
       res.status(500).json({ error: 'Erro ao adicionar tarefa.' });
   }
+});
+
+// Rota para atualizar uma tarefa existente
+app.put('/todos/:id', async (req, res) => {
+    const { id } = req.params; // Pega o ID da tarefa na URL
+    const {text,date,completed} = req.body; // Pega os dados do corpo da requisição
+
+    try {
+        // Atualiza a tarefa no banco de dados
+        const updatedTodo = await db.query(
+            'UPDATE todos SET text=?, completed=? WHERE id = ?', [text,completed,id]);
+
+            console.log(updatedTodo)
+        if (updatedTodo.rowCount.length === 0) {
+            return res.status(404).json({ message: 'Tarefa não encontrada' });
+        }
+
+        // Retorna a tarefa atualizada ao cliente
+        res.json(updatedTodo.rowCount[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: 'Erro ao atualizar tarefa' });
+    }
 });
 
 // Rota para obter todas as tarefas (independente do usuário)
