@@ -121,19 +121,20 @@ app.post('/todos', async (req, res) => {
 // Rota para atualizar uma tarefa existente
 app.put('/todos/:id', async (req, res) => {
     const { id } = req.params; // Pega o ID da tarefa na URL
-    const { text, date, completed } = req.body; // Pega os dados do corpo da requisição
+    const {text,date,completed} = req.body; // Pega os dados do corpo da requisição
 
     try {
         // Atualiza a tarefa no banco de dados
-        const updatedTodo = await pool.query(
-            'UPDATE todos SET text = $1, date = $2, completed = $3 WHERE id = $4', [text, date, completed, id]);
+        const updatedTodo = await db.query(
+            'UPDATE todos SET text=?, completed=? WHERE id = ?', [text,completed,id]);
 
-        if (updatedTodo.rows.length === 0) {
+            console.log(updatedTodo)
+        if (updatedTodo.rowCount.length === 0) {
             return res.status(404).json({ message: 'Tarefa não encontrada' });
         }
 
         // Retorna a tarefa atualizada ao cliente
-        res.json(updatedTodo.rows[0]);
+        res.json(updatedTodo.rowCount[0]);
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ error: 'Erro ao atualizar tarefa' });
