@@ -69,12 +69,14 @@ cron.schedule('0 18 * * *', () => {
 
 // Rota para registrar um novo usuário
 app.post('/users', async (req, res) => {
-    const { nome, email, password } = req.body;
-    console.log(req.body);
+    const { email, name, password } = req.body;
+    console.log('Dados recebidos:', req.body);
     try {
-        const [result] = await db.query('INSERT INTO users (nome, email, password) VALUES (?, ?, ?)', [nome, email, password]);
+        const [result] = await db.query('INSERT INTO users (nome, email, password) VALUES (?, ?, ?)', [name, email, password]);
+        console.log('Usuário inserido com ID:', result.insertId);
         res.status(201).json({ id: result.insertId });
     } catch (error) {
+        console.error('Erro',error);
         res.status(500).json({ error: 'Erro ao cadastrar o usuário.' });
     }
 });
