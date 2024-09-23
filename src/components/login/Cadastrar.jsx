@@ -31,6 +31,8 @@ const Cadastrar = () => {
                 })
             });
 
+            const data = await response.json();
+            console.log(data);
             if (response.ok) {
                 alert('Cadastro realizado com sucesso!');
                 // Redirecionar para o login após o cadastro
