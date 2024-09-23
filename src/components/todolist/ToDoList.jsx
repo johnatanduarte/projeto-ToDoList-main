@@ -21,7 +21,11 @@ const ToDoList = () => {
                     throw new Error('Falha ao buscar tarefas');
                 }
                 const fetchedTodos = await response.json();
+                console.log('Tarefas recebidas da API:', fetchedTodos);
+                
+                // Atualiza o estado com as tarefas do banco
                 setTodos(fetchedTodos);
+
                 // Agrupa tarefas completadas logo após carregá-las
                 groupTasksByMonth(fetchedTodos);
             } catch (error) {
@@ -55,14 +59,14 @@ const addTodo = async (todo) => {
 
         const newTodo = await response.json();
         const updatedTodos = [newTodo, ...todos];
+
+        // Atualiza o estado e o agrupamento
         setTodos(updatedTodos);
         groupTasksByMonth(updatedTodos); // Atualiza a tabela ao adicionar nova tarefa
     } catch (err) {
         console.error('Erro ao adicionar tarefa:', err);
     }
 };
-
-
 
     const updateTodo = async (updatedTodo) => {
         try {
@@ -75,6 +79,7 @@ const addTodo = async (todo) => {
             const updatedTodos = todos.map(todo =>
                 todo.id === updatedTodo.id ? updatedTodo : todo
             );
+
             setTodos(updatedTodos);
             groupTasksByMonth(updatedTodos); // Atualiza a tabela ao atualizar uma tarefa
 
@@ -102,8 +107,14 @@ const addTodo = async (todo) => {
     };
 
     // Função para agrupar tarefas completadas por mês
-    const groupTasksByMonth = () => {
-        const completedTasks = todos.filter(todo => todo.completed === true);
+    const groupTasksByMonth = (tasks) => {
+        if (!tasks || tasks.length === 0) {
+            console.log('Nenhuma tarefa para agrupar');
+            return;
+        }
+
+        const completedTasks = tasks.filter(todo => todo.completed === 1);
+        console.log('Tarefas completadas:', completedTasks);
 
         const tasksByMonth = completedTasks.reduce((acc, task) => {
             const month = task.date.slice(0,7); //Formato YYYY-MM
@@ -117,32 +128,9 @@ const addTodo = async (todo) => {
             count: tasksByMonth[month],
         }));
 
+        console.log('Dados agrupados por mês:', formattedData);
         setCompletedTasksByMonth(formattedData);
     };
-
-    useEffect(() => {
-        const fetchTodos = async () => {
-            if (!userId) {
-                return; // Prevenindo a busca se o usuário não estiver logado
-            }
-
-            try {
-                const response = await fetch(`http://localhost:3001/todos/${userId}`);
-                if (!response.ok) {
-                    throw new Error('Falha ao buscar tarefas');
-                }
-                const fetchedTodos = await response.json();
-                setTodos(fetchedTodos);
-                // Agrupa tarefas completadas logo após carregá-las
-                groupTasksByMonth(fetchedTodos);
-            } catch (error) {
-                console.error('Erro ao buscar tarefas:', error);
-            }
-        };
-
-        fetchTodos();
-    }, [userId]); // Carregar tarefas ao carregar o componente
-
 
     return (
         <div className="container-principal">
