@@ -1,7 +1,7 @@
 # To Do List
 
 Projeto implementado com Node.js, React e Vite.
-Banco de Dados implementado em MySQL Workbench.
+Banco de Dados implementado em MySQL Workbench (localhost).
 
 Funcionalidades disponíveis:
 - Login do usuário
