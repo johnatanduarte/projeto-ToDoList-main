@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'johnatanduartefranco95@gmail.com', // Seu email Gmail
-      pass: 'bgod shsf kzvd gyey' // Senha de aplicativo gerada no Gmail
+        user: 'johnatanduartefranco95@gmail.com', // Seu email Gmail
+        pass: 'bgod shsf kzvd gyey' // Senha de aplicativo gerada no Gmail
     },
 });
 
@@ -34,37 +34,54 @@ const sendEmail = async (to, subject, text) => {
     }
 };
 
-// Função para verificar tarefas para hoje e enviar e-mails
-const checkTasksForToday = async () => {
-    try {
-        const today = new Date().toISOString().slice(0, 10); // Pega a data de hoje no formato YYYY-MM-DD
+// Função para verificar se uma tarefa ocorrerá em 5 minutos
+const isTaskInFiveMinutes = (taskDate) => {
+    const currentTime = new Date();
+    const taskTime = new Date(taskDate);
 
-        // Buscar todas as tarefas que têm a data de hoje
-        const [tasks] = await db.query('SELECT * FROM todos WHERE DATE(date) = ?', [today]);
+    // Diferença em milissegundos
+    const difference = taskTime - currentTime;
+
+    // Verifica se está entre 0 e 5 minutos (300000 ms = 5 minutos)
+    return difference > 0 && difference <= 5 * 60 * 1000;
+};
+
+// Função para verificar tarefas futuras e enviar e-mails
+const checkTasksForReminder = async () => {
+    try {
+        const now = new Date();
+
+        // Buscar todas as tarefas futuras que ainda não tiveram o e-mail enviado
+        const [tasks] = await db.query('SELECT * FROM todos WHERE completed = 0 AND date >= ? AND email_sent = 0', [now]);
 
         for (const task of tasks) {
-            // Buscar o email do usuário vinculado à tarefa
-            const [user] = await db.query('SELECT email FROM users WHERE id = ?', [task.user_id]);
+            // Verifica se a tarefa está a 5 minutos de ser realizada
+            if (isTaskInFiveMinutes(task.date)) {
+                // Buscar o email do usuário vinculado à tarefa
+                const [user] = await db.query('SELECT email FROM users WHERE id = ?', [task.user_id]);
 
-            if (user.length > 0) {
-                const email = user[0].email;
-                const subject = `Lembrete: Tarefa "${task.text}" para hoje`;
-                const message = `Olá, você tem uma tarefa agendada para hoje: "${task.text}" em ${task.date}.`;
+                if (user.length > 0) {
+                    const email = user[0].email;
+                    const subject = `Lembrete: Tarefa "${task.text}" em 5 minutos`;
+                    const message = `Olá, você tem uma tarefa agendada para daqui 5 minutos: "${task.text}" em ${task.date}.`;
 
-                // Enviar email para o usuário
-                await sendEmail(email, subject, message);
+                    // Enviar email para o usuário
+                    await sendEmail(email, subject, message);
+
+                    // Atualizar a tarefa para marcar que o email foi enviado
+                    await db.query('UPDATE todos SET email_sent = 1 WHERE id = ?', [task.id]);
+                }
             }
         }
     } catch (error) {
-        console.error('Erro ao verificar tarefas de hoje:', error);
+        console.error('Erro ao verificar tarefas futuras:', error);
     }
 };
 
-// Agendamento diário para verificar tarefas às 00:00
-//minuto hora dia-do-mês mês dia-da-semana
-cron.schedule('0 18 * * *', () => {
-    console.log('Verificando tarefas agendadas para hoje...');
-    checkTasksForToday(); // Verifica as tarefas e envia e-mails
+// Agendamento para verificar tarefas a cada minuto
+cron.schedule('* * * * *', () => {
+    console.log('Verificando tarefas agendadas para os próximos 5 minutos...');
+    checkTasksForReminder(); // Verifica as tarefas e envia e-mails
 });
 
 // Rota para registrar um novo usuário
@@ -76,7 +93,7 @@ app.post('/users', async (req, res) => {
         console.log('Usuário inserido com ID:', result.insertId);
         res.status(201).json({ id: result.insertId });
     } catch (error) {
-        console.error('Erro',error);
+        console.error('Erro', error);
         res.status(500).json({ error: 'Erro ao cadastrar o usuário.' });
     }
 });
@@ -101,37 +118,36 @@ app.post('/login', async (req, res) => {
 app.get('/todos/:userId', async (req, res) => {
     const { userId } = req.params;
     try {
-      const [todos] = await db.query('SELECT * FROM todos WHERE user_id = ?', [userId]);
-      res.json(todos);
+        const [todos] = await db.query('SELECT * FROM todos WHERE user_id = ?', [userId]);
+        res.json(todos);
     } catch (error) {
-      res.status(500).json({ error: 'Erro ao buscar tarefas.' });
+        res.status(500).json({ error: 'Erro ao buscar tarefas.' });
     }
 });
 
 // Rota para adicionar uma nova tarefa
 app.post('/todos', async (req, res) => {
-  const { text, date, completed, user_id } = req.body;
-  console.log(req.body); // Adicione esta linha para verificar o que está sendo enviado
-  try {
-      const [result] = await db.query('INSERT INTO todos (text, date, completed, user_id) VALUES (?, ?, ?, ?)', [text, date, completed, user_id]);
-      res.status(201).json({ id: result.insertId });
-  } catch (error) {
-      console.error('Erro ao adicionar tarefa:', error); // Adicione um log para erros
-      res.status(500).json({ error: 'Erro ao adicionar tarefa.' });
-  }
+    const { text, date, completed, user_id } = req.body;
+    console.log(req.body); // Adicione esta linha para verificar o que está sendo enviado
+    try {
+        const [result] = await db.query('INSERT INTO todos (text, date, completed, user_id) VALUES (?, ?, ?, ?)', [text, date, completed, user_id]);
+        res.status(201).json({ id: result.insertId });
+    } catch (error) {
+        console.error('Erro ao adicionar tarefa:', error); // Adicione um log para erros
+        res.status(500).json({ error: 'Erro ao adicionar tarefa.' });
+    }
 });
 
 // Rota para atualizar uma tarefa existente
 app.put('/todos/:id', async (req, res) => {
     const { id } = req.params; // Pega o ID da tarefa na URL
-    const {text,date,completed} = req.body; // Pega os dados do corpo da requisição
+    const { text, date, completed } = req.body; // Pega os dados do corpo da requisição
 
     try {
         // Atualiza a tarefa no banco de dados
         const updatedTodo = await db.query(
-            'UPDATE todos SET text=?, completed=? WHERE id = ?', [text,completed,id]);
+            'UPDATE todos SET text=?, date=?, completed=? WHERE id = ?', [text, date, completed, id]);
 
-            console.log(updatedTodo)
         if (updatedTodo.rowCount.length === 0) {
             return res.status(404).json({ message: 'Tarefa não encontrada' });
         }
@@ -147,10 +163,10 @@ app.put('/todos/:id', async (req, res) => {
 // Rota para obter todas as tarefas (independente do usuário)
 app.get('/todos', async (req, res) => {
     try {
-      const [todos] = await db.query('SELECT * FROM todos'); // Get all tasks
-      res.json(todos);
+        const [todos] = await db.query('SELECT * FROM todos'); // Get all tasks
+        res.json(todos);
     } catch (error) {
-      res.status(500).json({ error: 'Erro ao buscar tarefas.' });
+        res.status(500).json({ error: 'Erro ao buscar tarefas.' });
     }
 });
 
@@ -168,13 +184,13 @@ app.get('/users', async (req, res) => {
 app.delete('/todos/:id', async (req, res) => {
     const { id } = req.params;
     try {
-      await db.query('DELETE FROM todos WHERE id = ?', [id]);
-      res.status(204).send(); // No content response
+        await db.query('DELETE FROM todos WHERE id = ?', [id]);
+        res.status(204).send(); // No content response
     } catch (error) {
-      res.status(500).json({ error: 'Erro ao deletar tarefa.' });
+        res.status(500).json({ error: 'Erro ao deletar tarefa.' });
     }
 });
 
 app.listen(3001, () => {
-  console.log('Servidor rodando na porta 3001');
+    console.log('Servidor rodando na porta 3001');
 });
